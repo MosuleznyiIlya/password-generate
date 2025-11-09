@@ -1,12 +1,18 @@
+import random
+import string
 import ui
-import libs
 
-def generate():
+def generate(ui_refs):
     pass
-def copy(root):
-    root.clipboard.clear
-    root.clipboard_append(ui.result_label.get())
-    root.update()
+def copy(ui_refs):
+    text = ui_refs["result_label"].get()
+    if not text:
+        ui.show_notification("Нечего копировать", ui_refs["notification_label"], ui_refs["root"])
+        return
+    ui_refs["root"].clipboard_clear()
+    ui_refs["root"].clipboard_append(text)
+    ui_refs["root"].update()
+    ui.show_notification("Скопировано!", ui_refs["notification_label"], ui_refs["root"])
 def slider_changed(value, entry, slider):
     entry.delete(0, 'end')
     entry.insert(0, str(int(value)))

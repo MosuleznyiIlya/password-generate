@@ -5,6 +5,9 @@ from customtkinter import *
 WEIGHT = 400
 HEIGHT = 300
 
+MIN_LEN = 6
+MAX_LEN = 999
+
 def create_ui():
     root = CTk()
     root.geometry(f'{WEIGHT}x{HEIGHT}')
@@ -27,5 +30,33 @@ def create_ui():
     copy_btn = CTkButton(btn_frame, text='Copy result', width=120, command=func.copy)
     copy_btn.pack(side=LEFT, padx=5)
 
-    root.mainloop()
+    len_frame = CTkFrame(root, fg_color='transparent')
+    len_frame.grid(column=0, row=3, sticky="n")
     
+    len_bar = CTkSlider(len_frame, width=220, from_= MIN_LEN, to=MAX_LEN, number_of_steps=MAX_LEN - MIN_LEN)
+    len_bar.pack(pady=10, padx=5, side='left')
+
+    len_entry = CTkEntry(len_frame,width=35)
+    len_entry.pack(pady=10, padx=5, side='left')
+
+    options_frame = CTkFrame(root)
+    options_frame.grid(column=0, row=4, sticky='n')
+
+    use_digits = BooleanVar(value=True)
+    use_uppercase = BooleanVar(value=True)
+    use_lowercase = BooleanVar(value=True)
+    use_symbols = BooleanVar(value=False)
+
+    checkbox_style = {
+    "master": options_frame,
+    "width": 80,
+    "height": 20,
+    "font": ("Arial", 12)
+}
+
+    CTkCheckBox(**checkbox_style, text="0-9", variable=use_digits).pack(side=LEFT, padx=0)
+    CTkCheckBox(**checkbox_style, text="A-Z", variable=use_uppercase).pack(side=LEFT, padx=0)
+    CTkCheckBox(**checkbox_style, text="a-z", variable=use_lowercase).pack(side=LEFT, padx=0)
+    CTkCheckBox(**checkbox_style, text="!@#$%", variable=use_symbols).pack(side=LEFT, padx=0)
+
+    root.mainloop()

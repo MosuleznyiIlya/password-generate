@@ -32,12 +32,18 @@ def create_ui():
 
     len_frame = CTkFrame(root, fg_color='transparent')
     len_frame.grid(column=0, row=3, sticky="n")
-    
-    len_bar = CTkSlider(len_frame, width=220, from_= MIN_LEN, to=MAX_LEN, number_of_steps=MAX_LEN - MIN_LEN)
-    len_bar.pack(pady=10, padx=5, side='left')
 
-    len_entry = CTkEntry(len_frame,width=35)
-    len_entry.pack(pady=10, padx=5, side='left')
+    len_entry = CTkEntry(len_frame, width=35)
+    len_entry.pack(side='left', padx=5, pady=10)
+
+    len_bar = CTkSlider(len_frame, width=220, from_=MIN_LEN, to=MAX_LEN, number_of_steps=MAX_LEN - MIN_LEN)
+    len_bar.pack(side='left', padx=5, pady=10)
+
+    len_bar.configure(command=lambda v: func.slider_changed(v, len_entry, len_bar))
+    len_entry.bind("<KeyRelease>", lambda e: func.entry_changed(e, len_entry, len_bar))
+
+    len_bar.set(MIN_LEN)
+    len_entry.insert(0, str(MIN_LEN))
 
     options_frame = CTkFrame(root)
     options_frame.grid(column=0, row=4, sticky='n')

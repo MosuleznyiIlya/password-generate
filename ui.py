@@ -32,7 +32,7 @@ def create_ui():
     btn_frame = CTkFrame(root, fg_color='transparent')
     btn_frame.grid(column=0, row=2, sticky='n', pady=(5, 5))
 
-    gen_btn = CTkButton(btn_frame, text='Generate password', width=100)
+    gen_btn = CTkButton(btn_frame, text='Generate password', width=100, command=func.generate)
     gen_btn.pack(side=LEFT, padx=5)
 
     copy_btn = CTkButton(btn_frame, text='Copy result', width=120)
@@ -92,3 +92,4 @@ def create_ui():
     len_entry.insert(0, str(MIN_LEN))
 
     root.mainloop()
+    

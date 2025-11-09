@@ -12,7 +12,6 @@ def show_notification(message, notification_label, root):
     notification_label.lift()
     notification_label.place(relx=0.5, rely=0.85, anchor=CENTER)
     root.after(2000, lambda: hide_notification(notification_label))
-
 def hide_notification(notification_label):
     notification_label.configure(text='')
 
@@ -90,6 +89,9 @@ def create_ui():
 
     len_bar.set(MIN_LEN)
     len_entry.insert(0, str(MIN_LEN))
+
+    root.bind('<Return>', lambda e: func.generate(ui_refs))
+    root.bind('<Control-c>', lambda e: func.copy(ui_refs))
 
     root.mainloop()
     

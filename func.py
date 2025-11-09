@@ -3,8 +3,10 @@ import libs
 
 def generate():
     pass
-def copy():
-    pass
+def copy(root):
+    root.clipboard.clear
+    root.clipboard_append(ui.result_label.get())
+    root.update()
 def slider_changed(value, entry, slider):
     entry.delete(0, 'end')
     entry.insert(0, str(int(value)))
